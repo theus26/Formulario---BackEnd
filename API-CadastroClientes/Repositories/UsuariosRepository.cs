@@ -1,5 +1,6 @@
 ﻿using API_CadastroClientes.MODELS;
 using API_CadastroClientes.MODELS.Entities.Usuarios;
+using API_CadastroClientes.Utils;
 
 namespace API_CadastroClientes.Repositories
 {
@@ -25,7 +26,7 @@ namespace API_CadastroClientes.Repositories
                 {
                     Name = user.Name,
                     Email = user.Email,
-                    Senha = user.Senha,
+                    Senha = MD5Helper.GerarHashMd5 (user.Senha),
                 };
                 db.usuario.Add(cliente_db);
                 db.SaveChanges();
