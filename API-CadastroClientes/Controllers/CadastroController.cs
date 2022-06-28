@@ -40,7 +40,7 @@ namespace API_CadastroClientes.Controllers
                     return BadRequest(new RespostaErrorDTO()
                     {
                         Status = StatusCodes.Status400BadRequest,
-                        Error = "Campos Invalidos" // Depois tentar mostrar a lista de erro, ou seja refatorar esse codigo
+                        Error = erros // Depois tentar mostrar a lista de erro, ou seja refatorar esse codigo
                     });
                 }
                 if (repos.Create(user))
@@ -55,7 +55,7 @@ namespace API_CadastroClientes.Controllers
                 return StatusCode(StatusCodes.Status500InternalServerError, new RespostaErrorDTO()
                 {
                     Status = StatusCodes.Status500InternalServerError,
-                    Error = "Ocorreu erro ao salvar usuário, Tente Novamente!"
+                    Errorr = "Ocorreu erro ao salvar usuário, Tente Novamente!"
                 });
             }
         }

@@ -7,6 +7,7 @@ namespace API_CadastroClientes.Repositories
     public interface IUsuariosRepository
     {
         public bool Create(PostUser cliente);
+        public Usuarios Read(string email, string senha);
     }
 
     public class UsuariosRepository: IUsuariosRepository
@@ -35,6 +36,22 @@ namespace API_CadastroClientes.Repositories
             catch
             {
                 return false;
+            }
+
+
+        }
+
+        public Usuarios Read(string email, string senha)
+        {
+            try
+            {
+                var cliente_db = db.usuario.Find(email,senha);
+                return cliente_db;
+            }
+
+            catch
+            {
+                return new Usuarios();
             }
         }
     }

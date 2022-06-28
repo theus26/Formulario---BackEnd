@@ -2,7 +2,9 @@
 {
     public class RespostaErrorDTO
     {
-        public string Error { get; set; }
+        public List<string> Error { get; set; }
+        public string Errorr { get; set; }
+
         public int Status { get; set; }
     }
 }
