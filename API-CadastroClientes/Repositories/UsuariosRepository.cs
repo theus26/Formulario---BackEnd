@@ -7,7 +7,8 @@ namespace API_CadastroClientes.Repositories
     public interface IUsuariosRepository
     {
         public bool Create(PostUser cliente);
-        public Usuarios Read(string email, string senha);
+        bool ExisteUserpeloEmail(string email);
+         bool Senha( string senha);
     }
 
     public class UsuariosRepository: IUsuariosRepository
@@ -18,6 +19,8 @@ namespace API_CadastroClientes.Repositories
         {
               db = _db;
         }
+
+       
 
         public bool Create(PostUser user)
         {
@@ -41,18 +44,16 @@ namespace API_CadastroClientes.Repositories
 
         }
 
-        public Usuarios Read(string email, string senha)
+        public bool ExisteUserpeloEmail(string email)
         {
-            try
-            {
-                var cliente_db = db.usuario.Find(email,senha);
-                return cliente_db;
-            }
+          return db.usuario.Any(u => u.Email.ToLower() == email.ToLower());
+          
+        }
 
-            catch
-            {
-                return new Usuarios();
-            }
+        public bool Senha( string senha)
+        {
+            return db.usuario.Any(u => u.Senha.ToLower()  == senha.ToLower());
+           
         }
     }
 }

@@ -35,19 +35,24 @@ namespace API_CadastroClientes.Controllers
                 {
                     erros.Add("Email Inválido");
                 }
+                if (repos.ExisteUserpeloEmail(user.Email))
+                {
+                    erros.Add("Existe uma conta com esse Email!");
+                }
                 if (erros.Count > 0)
                 {
                     return BadRequest(new RespostaErrorDTO()
                     {
                         Status = StatusCodes.Status400BadRequest,
-                        Error = erros // Depois tentar mostrar a lista de erro, ou seja refatorar esse codigo
+                        Error = erros 
                     });
                 }
+                user.Email = user.Email.ToLower();
                 if (repos.Create(user))
                    return Ok("Cliente Cadastrado");
 
                     return BadRequest();
-                
+               
                     
             }
             catch (Exception ex)
